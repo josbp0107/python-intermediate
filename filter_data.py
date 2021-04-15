@@ -75,17 +75,41 @@ DATA = [
 
 def run():
     all_python_devs = [worker["name"] for worker in DATA if worker["language"] == "python"]
-    
     for worker in all_python_devs:
         print(worker)
+    
+    print("#"*100)
+
+    all_python_devs_filter = list(filter(lambda worker: worker["language"]== "python", DATA))
+    for worker in all_python_devs_filter:
+        print(worker)
+    
+    print("#"*100)
+
+    all_globant_workers = list(filter(lambda worker: worker["organization"]== "Globant", DATA))
+    for worker in all_globant_workers:
+        print(worker)
+
+    print("#"*100)
 
     adults = list(filter(lambda worker: worker["age"] > 18, DATA))
     adults = list(map(lambda worker: worker["name"], adults))
+
+    for worker in adults:
+        print(worker)
+    
+    print("#"*100)
 
     # | o pipe, nos ayuda a unir un diccionario con otro 
     old_people = list(map(lambda worker: worker | {"old":worker["age"]>70}, DATA))
     for worker in old_people:
         parse_dict = json.dumps(worker, ensure_ascii=False,  indent=4)
         print(parse_dict)
+
+    print("#" * 100)
+
+    old_people_comperhension = [worker["name"] for worker in DATA if worker["age"] > 18]
+    print(old_people_comperhension)
+
 if __name__ == '__main__':
     run()
